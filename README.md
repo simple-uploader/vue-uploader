@@ -16,6 +16,7 @@
 * Queue management
 * File validation
 * Upload progress
+* Time remaining
 * Chunk uploads
 
 ## Install
