@@ -1,5 +1,5 @@
 <template>
-  <uploader :options="options" class="uploader-example">
+  <uploader :options="options" class="uploader-example" ref="uploader">
     <uploader-unsupport></uploader-unsupport>
     <uploader-drop>
       <p>Drop files here to upload or</p>
@@ -7,6 +7,7 @@
       <uploader-btn :attrs="attrs">select images</uploader-btn>
       <uploader-btn :directory="true">select folder</uploader-btn>
     </uploader-drop>
+    <!-- <uploader-files></uploader-files> -->
     <uploader-list></uploader-list>
   </uploader>
 </template>
@@ -23,6 +24,11 @@
           accept: 'image/*'
         }
       }
+    },
+    mounted () {
+      this.$nextTick(() => {
+        window.uploader = this.$refs.uploader.uploader
+      })
     }
   }
 </script>
