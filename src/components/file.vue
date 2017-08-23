@@ -22,11 +22,11 @@
       :formated-time-remaining="formatedTimeRemaining"
       :type="type"
       :extension="extension"
-      :file-icon="fileIcon"
+      :file-category="fileCategory"
       >
       <div class="uploader-file-progress" :class="progressingClass" :style="progressStyle"></div>
       <div class="uploader-file-info">
-        <div class="uploader-file-name"><i class="uploader-file-icon" :icon="fileIcon"></i>{{name}}</div>
+        <div class="uploader-file-name"><i class="uploader-file-icon" :icon="fileCategory"></i>{{name}}</div>
         <div class="uploader-file-size">{{formatedSize}}</div>
         <div class="uploader-file-meta"></div>
         <div class="uploader-file-status">
@@ -89,7 +89,7 @@
       }
     },
     computed: {
-      fileIcon () {
+      fileCategory () {
         const extension = this.extension
         const isFolder = this.file.isFolder
         let type = isFolder ? 'folder' : 'unknown'
