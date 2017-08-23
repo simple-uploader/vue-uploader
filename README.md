@@ -112,6 +112,20 @@ Root component.
 
   Default `true`, Whether the file will be start uploading after it is added.
 
+#### Scoped Slots
+
+* `files {Array}`
+
+  An array of files (no folders).
+
+* `fileList {Array}`
+
+  An array of files and folders.
+
+* `started`
+
+  Started uploading or not.
+
 ### UploaderBtn
 
 Select files button.
@@ -138,9 +152,21 @@ Droped files area.
 
 An array of `Uploader.File` file(folder) objects added by the user, but it treated Folder as `Uploader.File` Object.
 
+#### Scoped Slots
+
+* `fileList {Array}`
+
+  An array of files and folders.
+
 ### UploaderFiles
 
 An array of `Uploader.File` file objects added by the user.
+
+#### Scoped Slots
+
+* `files {Array}`
+
+  An array of files (no folders).
 
 ### UploaderUnsupport
 
@@ -159,6 +185,96 @@ File item component.
 * `list {Boolean}`
 
   It should be `true` if it is puted in `UploaderList`
+
+#### Scoped Slots
+
+* `file {Uploader.File}`
+
+  `Uploader.File` instance.
+
+* `list {Boolean}`
+
+  In `UploaderList` component or not.
+
+* `status {String}`
+
+  Current status, the values is one of `success`, `error`, `uploading`, `paused`, `waiting`
+
+* `name {String}`
+
+  File name.
+
+* `paused {Boolean}`
+
+  Indicated if the file is paused.
+
+* `error {Boolean}`
+
+  Indicated if the file has encountered an error.
+
+* `averageSpeed {Number}`
+
+  Average upload speed, bytes per second.
+
+* `formatedAverageSpeed {String}`
+
+  Formated average upload speed, eg: `3 KB / S`
+
+* `currentSpeed {Number}`
+
+  Current upload speed, bytes per second.
+
+* `isComplete {Boolean}`
+
+  Indicated whether the file has completed uploading and received a server response.
+
+* `isUploading {Boolean}`
+
+  Indicated whether file chunks is uploading.
+
+* `size {Number}`
+
+  Size in bytes of the file.
+
+* `formatedSize {Number}`
+
+  Formated file size, eg: `10 KB`.
+
+* `uploadedSize {Number}`
+
+  Size uploaded in bytes.
+
+* `progress {Number}`
+
+  A number between 0 and 1 indicating the current upload progress of the file.
+
+* `progressStyle {String}`
+
+  The file progress element's transform style, eg: `{transform: '-50%'}`.
+
+* `progressingClass {String}`
+
+  The value will be `uploader-file-progressing` if the file is uploading.
+
+* `timeRemaining {Number}`
+
+  Remaining time to finish upload file in seconds.
+
+* `formatedTimeRemaining {String}`
+
+  Formated remaining time, eg: `3 miniutes`.
+
+* `type {String}`
+
+  File type.
+
+* `extension {String}`
+
+  File extension in lowercase.
+
+* `fileCategory {String}`
+
+  File category, one of `folder`, `document`, `video`, `audio`, `image`, `unknown`.
 
 ## Development
 
