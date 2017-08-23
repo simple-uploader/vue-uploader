@@ -112,6 +112,24 @@ Root component.
 
   Default `true`, Whether the file will be start uploading after it is added.
 
+#### Events
+
+* `upload-start`
+
+  Start uploading.
+
+* `file-added(file)`
+
+  File added, this event is used for file validation. To reject this file you should set `file.ignored = true`.
+
+* `file-removed(file)`
+
+  The file was removed from the upload queue.
+
+* `files-submitted(files, fileList)`
+
+  The files are added to upload queue.
+
 #### Scoped Slots
 
 * `files {Array}`
