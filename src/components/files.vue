@@ -1,8 +1,8 @@
 <template>
   <div class="uploader-files">
-    <slot>
+    <slot :files="files">
       <ul>
-        <li v-for="file in $parent.files" :key="file.id">
+        <li v-for="file in files" :key="file.id">
           <uploader-file :file="file"></uploader-file>
         </li>
       </ul>
@@ -17,6 +17,11 @@
 
   export default {
     name: COMPONENT_NAME,
+    computed: {
+      files () {
+        return this.$parent.files
+      }
+    },
     components: {
       UploaderFile
     }

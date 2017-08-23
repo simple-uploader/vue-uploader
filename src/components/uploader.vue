@@ -1,6 +1,6 @@
 <template>
   <div class="uploader">
-    <slot></slot>
+    <slot :files="files" :file-list="fileList" :started="started"></slot>
   </div>
 </template>
 

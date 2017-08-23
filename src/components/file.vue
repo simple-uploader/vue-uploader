@@ -1,7 +1,31 @@
 <template>
   <div class="uploader-file" :status="status">
-    <slot>
-      <div class="uploader-file-progress" :class="uploadingClass" :style="progressStyle"></div>
+    <slot
+      :file="file"
+      :list="list"
+      :status="status"
+      :name="name"
+      :paused="paused"
+      :error="error"
+      :aborted="aborted"
+      :average-speed="averageSpeed"
+      :formated-average-speed="formatedAverageSpeed"
+      :current-speed="currentSpeed"
+      :is-complete="isComplete"
+      :is-uploading="isUploading"
+      :size="size"
+      :formated-size="formatedSize"
+      :uploaded-size="uploadedSize"
+      :progress="progress"
+      :progress-style="progressStyle"
+      :progressing-class="progressingClass"
+      :time-remaining="timeRemaining"
+      :formated-time-remaining="formatedTimeRemaining"
+      :type="type"
+      :extension="extension"
+      :file-icon="fileIcon"
+      >
+      <div class="uploader-file-progress" :class="progressingClass" :style="progressStyle"></div>
       <div class="uploader-file-info">
         <div class="uploader-file-name"><i class="uploader-file-icon" :icon="fileIcon"></i>{{name}}</div>
         <div class="uploader-file-size">{{formatedSize}}</div>
@@ -63,7 +87,7 @@
         timeRemaining: 0,
         type: '',
         extension: '',
-        uploadingClass: ''
+        progressingClass: ''
       }
     },
     computed: {
@@ -97,7 +121,7 @@
         }
       },
       formatedAverageSpeed () {
-        return `${Uploader.utils.formatSize(Math.round(this.averageSpeed))} / s`
+        return `${Uploader.utils.formatSize(this.averageSpeed)} / s`
       },
       status () {
         const isUploading = this.isUploading
@@ -128,11 +152,11 @@
       status (newStatus, oldStatus) {
         if (oldStatus && newStatus === 'uploading' && oldStatus !== 'uploading') {
           this.tid = setTimeout(() => {
-            this.uploadingClass = 'uploader-file-progressing'
+            this.progressingClass = 'uploader-file-progressing'
           }, 200)
         } else {
           clearTimeout(this.tid)
-          this.uploadingClass = ''
+          this.progressingClass = ''
         }
       }
     },
