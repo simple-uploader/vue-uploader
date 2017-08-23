@@ -7,7 +7,6 @@
       :name="name"
       :paused="paused"
       :error="error"
-      :aborted="aborted"
       :average-speed="averageSpeed"
       :formated-average-speed="formatedAverageSpeed"
       :current-speed="currentSpeed"
@@ -75,7 +74,6 @@
         name: '',
         paused: false,
         error: false,
-        aborted: false,
         averageSpeed: 0,
         currentSpeed: 0,
         isComplete: false,
@@ -163,7 +161,6 @@
     methods: {
       _actionCheck () {
         this.paused = this.file.paused
-        this.aborted = this.file.aborted
         this.error = this.file.error
         this.isUploading = this.file.isUploading()
       },
@@ -219,7 +216,7 @@
       }
     },
     mounted () {
-      const staticProps = ['name', 'paused', 'error', 'aborted', 'averageSpeed', 'currentSpeed']
+      const staticProps = ['name', 'paused', 'error', 'averageSpeed', 'currentSpeed']
       const fnProps = [
         'isComplete',
         'isUploading',
