@@ -4,6 +4,12 @@
   "description": "A Vue.js upload component powered by simple-uploader.js",
   "main": "dist/vue-uploader.js",
   "module": "src/index.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/simple-uploader/vue-uploader.git"
+  },
+  "bugs": "https://github.com/simple-uploader/vue-uploader/issues",
+  "homepage": "https://github.com/simple-uploader/vue-uploader",
   "author": "dolymood@gmail.com",
   "scripts": {
     "dev": "node build/dev-server.js",
