@@ -1,5 +1,9 @@
 # vue-simple-uploader
 
+[![NPM Version][npm-image]][npm-url]
+[![NPM Downloads][downloads-image]][downloads-url]
+[![juejin likes](juejin-image)](juejin-url)
+
 > A Vue.js upload component powered by [simple-uploader.js](https://github.com/simple-uploader/Uploader)
 
 ![example](https://github.com/simple-uploader/vue-uploader/blob/master/example/simple-uploader.gif)
@@ -309,3 +313,10 @@ npm run build
 # build for production and view the bundle analyzer report
 npm run build --report
 ```
+
+[npm-image]: https://img.shields.io/npm/v/vue-simple-uploader.svg?style=flat
+[npm-url]: https://npmjs.org/package/vue-simple-uploader
+[downloads-image]: https://img.shields.io/npm/dm/vue-simple-uploader.svg?style=flat
+[downloads-url]: https://npmjs.org/package/vue-simple-uploader
+[juejin-image]: https://badge.juejin.im/entry/599dad0ff265da248b04d7b8/likes.svg?style=flat
+[juejin-url]: https://juejin.im/entry/599dad0ff265da248b04d7b8/detail
