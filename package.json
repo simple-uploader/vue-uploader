@@ -1,9 +1,8 @@
 {
   "name": "vue-simple-uploader",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "description": "A Vue.js upload component powered by simple-uploader.js",
   "main": "dist/vue-uploader.js",
-  "module": "src/index.js",
   "repository": {
     "type": "git",
     "url": "https://github.com/simple-uploader/vue-uploader.git"
