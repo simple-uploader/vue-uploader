@@ -63,7 +63,6 @@
       },
       fileSuccess (rootFile, file, message) {
         this.$emit(EVENT_FILE_SUCCESS, rootFile, file, message)
-        }
       }
     },
     created () {
