@@ -13,6 +13,7 @@
   const EVENT_FILE_ADDED = 'file-added'
   const EVENT_FILE_REMOEED = 'file-removed'
   const EVENT_FILES_SUBMITTED = 'files-submitted'
+  const EVENT_FILE_SUCCESS = 'file-success'
 
   export default {
     name: COMPONENT_NAME,
@@ -59,6 +60,10 @@
         if (this.autoStart) {
           this.uploader.upload()
         }
+      },
+      fileSuccess (rootFile, file, message) {
+        this.$emit(EVENT_FILE_SUCCESS, rootFile, file, message)
+        }
       }
     },
     created () {
@@ -68,6 +73,7 @@
       uploader.on('fileAdded', this.fileAdded)
       uploader.on('fileRemoved', this.fileRemoved)
       uploader.on('filesSubmitted', this.filesSubmitted)
+      uploader.on('fileSuccess', this.fileSuccess)
     },
     destroyed () {
       const uploader = this.uploader
@@ -75,6 +81,7 @@
       uploader.off('fileAdded', this.fileAdded)
       uploader.off('fileRemoved', this.fileRemoved)
       uploader.off('filesSubmitted', this.filesSubmitted)
+      uploader.on('fileSuccess', this.fileSuccess)
       this.uploader = null
     }
   }
