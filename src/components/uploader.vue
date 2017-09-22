@@ -80,7 +80,7 @@
       uploader.off('fileAdded', this.fileAdded)
       uploader.off('fileRemoved', this.fileRemoved)
       uploader.off('filesSubmitted', this.filesSubmitted)
-      uploader.on('fileSuccess', this.fileSuccess)
+      uploader.off('fileSuccess', this.fileSuccess)
       this.uploader = null
     }
   }
