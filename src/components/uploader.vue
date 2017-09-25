@@ -62,7 +62,7 @@
         }
       },
       fileSuccess (rootFile, file, message) {
-        this.$emit(EVENT_FILE_SUCCESS, rootFile, file, message)
+        this.$emit(EVENT_FILE_SUCCESS, rootFile, file, JSON.parse(message))
       }
     },
     created () {
