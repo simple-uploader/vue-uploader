@@ -135,7 +135,7 @@ Root component.
   
 * `file-success(rootFile, file, message)`
 
-  A specific file was completed. First argument rootFile is the root Uploader.File instance which contains or equal the  completed file, second argument file argument is instance of Uploader.File too, it's the current completed file object, third argument message contains server response. Response is always a string. 
+  A specific file was completed. First argument rootFile is the root Uploader.File instance which contains or equal the  completed file, second argument file argument is instance of Uploader.File too, it's the current completed file object, third argument message contains server response. 
 
 #### Scoped Slots
 
