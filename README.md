@@ -117,21 +117,15 @@ Root component.
 
 #### Events
 
-* `upload-start`
+See [simple-uploader.js uploader/events](https://github.com/simple-uploader/Uploader#events)
 
-  Start uploading.
+**Note:**
 
-* `file-added(file)`
+* All events name will be transformed by [lodash.kebabCase](https://github.com/lodash/lodash/blob/master/kebabCase.js), eg: `fileSuccess` will be transformed to `file-success`
 
-  File added, this event is used for file validation. To reject this file you should set `file.ignored = true`.
+* `catchAll` event will not be emited.
 
-* `file-removed(file)`
-
-  The file was removed from the upload queue.
-
-* `files-submitted(files, fileList)`
-
-  The files are added to upload queue.
+* `file-added(file)`, file added event, this event is used for file validation. To reject this file you should set `file.ignored = true`.
 
 #### Scoped Slots
 

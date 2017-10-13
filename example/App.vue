@@ -1,5 +1,5 @@
 <template>
-  <uploader :options="options" class="uploader-example" ref="uploader">
+  <uploader :options="options" class="uploader-example" ref="uploader" @file-complete="fileComplete" @complete="complete">
     <uploader-unsupport></uploader-unsupport>
     <uploader-drop>
       <p>Drop files here to upload or</p>
@@ -23,6 +23,14 @@
         attrs: {
           accept: 'image/*'
         }
+      }
+    },
+    methods: {
+      complete () {
+        console.log('complete', arguments)
+      },
+      fileComplete () {
+        console.log('file complete', arguments)
       }
     },
     mounted () {

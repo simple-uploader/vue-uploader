@@ -120,21 +120,15 @@ new Vue({
 
 #### 事件
 
-* `upload-start`
+参见 [simple-uploader.js uploader 事件](https://github.com/simple-uploader/Uploader/blob/develop/README_zh-CN.md#事件)
 
-  开始上传。
+**注意：**
 
-* `file-added(file)`
+* 所有的事件都会通过 [lodash.kebabCase](https://github.com/lodash/lodash/blob/master/kebabCase.js) 做转换，例如 `fileSuccess` 就会变成 `file-success`。
 
-  添加了一个文件，一般用作文件校验，如果给 `file` 增加 `ignored` 属性为 `true` 的话就会被过滤掉。
+* `catch-all` 这个事件是不会触发的。
 
-* `file-removed(file)`
-
-  移除一个文件（文件夹）。
-
-* `files-submitted(files, fileList)`
-
-  所选择的文件们添加到上传队列后触发。
+* `file-added(file)`, 添加了一个文件事件，一般用做文件校验，如果设置 `file.ignored = true` 的话这个文件就会被过滤掉。
 
 #### 作用域插槽
 

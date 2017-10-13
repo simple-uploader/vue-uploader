@@ -33,3 +33,7 @@ export function secondsToStr (temp) {
     return (number > 1) ? 's' : ''
   }
 }
+
+export function kebabCase (s) {
+  return s.replace(/[A-Z]/g, (m) => `-${m.toLowerCase()}`)
+}
