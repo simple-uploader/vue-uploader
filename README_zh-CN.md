@@ -144,6 +144,18 @@ new Vue({
 
   是否开始上传了。
 
+#### 得到 `Uploader` 实例
+
+可以通过如下方式获得：
+
+```js
+// 在 uploader 组件上会有 uploader 属性 指向的就是 Uploader 实例
+const uploaderInstance = this.$refs.uploader.uploader
+// 这里可以调用实例方法
+// https://github.com/simple-uploader/Uploader/blob/develop/README_zh-CN.md#方法
+uploaderInstance.cancel()
+```
+
 ### UploaderBtn
 
 点选上传文件按钮。

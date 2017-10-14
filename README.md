@@ -141,6 +141,17 @@ See [simple-uploader.js uploader/events](https://github.com/simple-uploader/Uplo
 
   Started uploading or not.
 
+#### Get `Uploader` instance
+
+You can get it like this:
+
+```js
+const uploaderInstance = this.$refs.uploader.uploader
+// now you can call all uploader methods
+// https://github.com/simple-uploader/Uploader#methods
+uploaderInstance.cancel()
+```
+
 ### UploaderBtn
 
 Select files button.
