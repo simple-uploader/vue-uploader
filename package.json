@@ -1,6 +1,6 @@
 {
   "name": "vue-simple-uploader",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "A Vue.js upload component powered by simple-uploader.js",
   "main": "dist/vue-uploader.js",
   "repository": {
@@ -17,7 +17,7 @@
     "lint": "eslint --ext .js,.vue src test/unit/specs"
   },
   "dependencies": {
-    "simple-uploader.js": "^0.1.0"
+    "simple-uploader.js": "^0.1.1"
   },
   "peerDependencies": {
     "vue": ">=2.1"
