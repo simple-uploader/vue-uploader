@@ -1,15 +1,5 @@
 <template>
-  <uploader :options="options" class="uploader-example" ref="uploader" @file-complete="fileComplete" @complete="complete">
-    <uploader-unsupport></uploader-unsupport>
-    <uploader-drop>
-      <p>Drop files here to upload or</p>
-      <uploader-btn>select files</uploader-btn>
-      <uploader-btn :attrs="attrs">select images</uploader-btn>
-      <uploader-btn :directory="true">select folder</uploader-btn>
-    </uploader-drop>
-    <!-- <uploader-files></uploader-files> -->
-    <uploader-list></uploader-list>
-  </uploader>
+  <uploader :options="options" class="uploader-example" ref="uploader" @file-complete="fileComplete" @complete="complete"></uploader>
 </template>
 
 <script>

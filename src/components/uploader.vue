@@ -1,12 +1,26 @@
 <template>
   <div class="uploader">
-    <slot :files="files" :file-list="fileList" :started="started"></slot>
+    <slot :files="files" :file-list="fileList" :started="started">
+      <uploader-unsupport></uploader-unsupport>
+      <uploader-drop>
+        <p>Drop files here to upload or</p>
+        <uploader-btn>select files</uploader-btn>
+        <uploader-btn :directory="true">select folder</uploader-btn>
+      </uploader-drop>
+      <uploader-list></uploader-list>
+    </slot>
   </div>
 </template>
 
 <script>
   import Uploader from 'simple-uploader.js'
   import { kebabCase } from '../common/utils'
+  import UploaderBtn from './btn.vue'
+  import UploaderDrop from './drop.vue'
+  import UploaderUnsupport from './unsupport.vue'
+  import UploaderList from './list.vue'
+  import UploaderFiles from './files.vue'
+  import UploaderFile from './file.vue'
 
   const COMPONENT_NAME = 'uploader'
 
@@ -74,6 +88,14 @@
       uploader.off('fileRemoved', this.fileRemoved)
       uploader.off('filesSubmitted', this.filesSubmitted)
       this.uploader = null
+    },
+    components: {
+      UploaderBtn,
+      UploaderDrop,
+      UploaderUnsupport,
+      UploaderList,
+      UploaderFiles,
+      UploaderFile
     }
   }
 </script>
