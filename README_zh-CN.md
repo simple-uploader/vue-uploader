@@ -114,6 +114,23 @@ new Vue({
 
   参考 [simple-uploader.js 配置](https://github.com/simple-uploader/Uploader/blob/develop/README_zh-CN.md#配置)。
 
+  此外，你还可以增加 `parseTimeRemaining(timeRemaining, parsedTimeRemaining)` 到配置项中，用于格式化你想要剩余时间，一般可以用来做多语言。参数：
+
+  * `timeRemaining{Number}`, 剩余时间，秒为单位
+
+  * `parsedTimeRemaining{String}`, 默认展示的剩余时间内容，你也可以这样做替换使用：
+
+    ```js
+    parseTimeRemaining: function (timeRemaining, parsedTimeRemaining) {
+      return parsedTimeRemaining
+        .replace(/\syears?/, '年')
+        .replace(/\days?/, '天')
+        .replace(/\shours?/, '小时')
+        .replace(/\sminutes?/, '分钟')
+        .replace(/\sseconds?/, '秒')
+    }
+    ```
+
 * `autoStart {Boolean}`
 
   默认 `true`, 是否选择文件后自动开始上传。

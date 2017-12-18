@@ -111,6 +111,23 @@ Root component.
 
   See [simple-uploader.js options](https://github.com/simple-uploader/Uploader#configuration).
 
+  Besides, you can added `parseTimeRemaining(timeRemaining, parsedTimeRemaining)` function option to format the current file's time remaining value(seconds, number), you can return your language time remaining text, params:
+
+  * `timeRemaining{Number}`, time remaining seconds
+
+  * `parsedTimeRemaining{String}`, default shown time remaining text, you can use it like this:
+
+    ```js
+    parseTimeRemaining: function (timeRemaining, parsedTimeRemaining) {
+      return parsedTimeRemaining
+        .replace(/\syears?/, '年')
+        .replace(/\days?/, '天')
+        .replace(/\shours?/, '小时')
+        .replace(/\sminutes?/, '分钟')
+        .replace(/\sseconds?/, '秒')
+    }
+    ```
+
 * `autoStart {Boolean}`
 
   Default `true`, Whether the file will be start uploading after it is added.
