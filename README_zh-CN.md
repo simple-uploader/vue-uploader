@@ -118,6 +118,20 @@ new Vue({
 
   默认 `true`, 是否选择文件后自动开始上传。
 
+* `fileStatusText {Object}`
+
+  默认：
+  ```js
+  {
+    success: 'success',
+    error: 'error',
+    uploading: 'uploading',
+    paused: 'paused',
+    waiting: 'waiting'
+  }
+  ```
+  用于转换文件上传状态文本映射对象。
+
 #### 事件
 
 参见 [simple-uploader.js uploader 事件](https://github.com/simple-uploader/Uploader/blob/develop/README_zh-CN.md#事件)

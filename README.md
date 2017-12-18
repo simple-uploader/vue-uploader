@@ -115,6 +115,20 @@ Root component.
 
   Default `true`, Whether the file will be start uploading after it is added.
 
+* `fileStatusText {Object}`
+
+  Default:
+  ```js
+  {
+    success: 'success',
+    error: 'error',
+    uploading: 'uploading',
+    paused: 'paused',
+    waiting: 'waiting'
+  }
+  ```
+  An object map for file status text.
+
 #### Events
 
 See [simple-uploader.js uploader/events](https://github.com/simple-uploader/Uploader#events)

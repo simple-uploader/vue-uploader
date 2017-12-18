@@ -1,5 +1,5 @@
 <template>
-  <uploader :options="options" class="uploader-example" ref="uploader" @file-complete="fileComplete" @complete="complete"></uploader>
+  <uploader :options="options" :file-status-text="statusText" class="uploader-example" ref="uploader" @file-complete="fileComplete" @complete="complete"></uploader>
 </template>
 
 <script>
@@ -12,6 +12,13 @@
         },
         attrs: {
           accept: 'image/*'
+        },
+        statusText: {
+          success: '成功了',
+          error: '出错了',
+          uploading: '上传中',
+          paused: '暂停中',
+          waiting: '等待中'
         }
       }
     },
