@@ -144,10 +144,16 @@
       },
       formatedTimeRemaining () {
         const timeRemaining = this.timeRemaining
-        if (timeRemaining === Number.POSITIVE_INFINITY) {
+        const file = this.file
+        if (timeRemaining === Number.POSITIVE_INFINITY || timeRemaining === 0) {
           return ''
         }
-        return secondsToStr(this.timeRemaining)
+        let parsedTimeRemaining = secondsToStr(timeRemaining)
+        const parseTimeRemaining = file.uploader.opts.parseTimeRemaining
+        if (parseTimeRemaining) {
+          parsedTimeRemaining = parseTimeRemaining(timeRemaining, parsedTimeRemaining)
+        }
+        return parsedTimeRemaining
       }
     },
     watch: {
