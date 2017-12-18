@@ -23,6 +23,7 @@
   import UploaderFile from './file.vue'
 
   const COMPONENT_NAME = 'uploader'
+  const FILE_ADDED_EVENT = 'fileAdded'
 
   export default {
     name: COMPONENT_NAME,
@@ -36,6 +37,18 @@
       autoStart: {
         type: Boolean,
         default: true
+      },
+      fileStatusText: {
+        type: Object,
+        default () {
+          return {
+            success: 'success',
+            error: 'error',
+            uploading: 'uploading',
+            paused: 'paused',
+            waiting: 'waiting'
+          }
+        }
       }
     },
     data () {
@@ -50,6 +63,7 @@
         this.started = true
       },
       fileAdded (file) {
+        this.$emit(kebabCase(FILE_ADDED_EVENT), file)
         if (file.ignored) {
           // is ignored, filter it
           return false
@@ -67,16 +81,21 @@
         }
       },
       allEvent (...args) {
-        args[0] = kebabCase(args[0])
+        const name = args[0]
+        if (name === FILE_ADDED_EVENT) {
+          return
+        }
+        args[0] = kebabCase(name)
         this.$emit.apply(this, args)
       }
     },
     created () {
       const uploader = new Uploader(this.options)
       this.uploader = uploader
+      this.uploader.fileStatusText = this.fileStatusText
       uploader.on('catchAll', this.allEvent)
       uploader.on('uploadStart', this.uploadStart)
-      uploader.on('fileAdded', this.fileAdded)
+      uploader.on(FILE_ADDED_EVENT, this.fileAdded)
       uploader.on('fileRemoved', this.fileRemoved)
       uploader.on('filesSubmitted', this.filesSubmitted)
     },
@@ -84,7 +103,7 @@
       const uploader = this.uploader
       uploader.off('catchAll', this.allEvent)
       uploader.off('uploadStart', this.uploadStart)
-      uploader.off('fileAdded', this.fileAdded)
+      uploader.off(FILE_ADDED_EVENT, this.fileAdded)
       uploader.off('fileRemoved', this.fileRemoved)
       uploader.off('filesSubmitted', this.filesSubmitted)
       this.uploader = null
