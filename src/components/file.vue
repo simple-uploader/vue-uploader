@@ -4,7 +4,6 @@
       :file="file"
       :list="list"
       :status="status"
-      :name="name"
       :paused="paused"
       :error="error"
       :average-speed="averageSpeed"
@@ -26,7 +25,7 @@
       >
       <div class="uploader-file-progress" :class="progressingClass" :style="progressStyle"></div>
       <div class="uploader-file-info">
-        <div class="uploader-file-name"><i class="uploader-file-icon" :icon="fileCategory"></i>{{name}}</div>
+        <div class="uploader-file-name"><i class="uploader-file-icon" :icon="fileCategory"></i>{{file.name}}</div>
         <div class="uploader-file-size">{{formatedSize}}</div>
         <div class="uploader-file-meta"></div>
         <div class="uploader-file-status">
@@ -71,7 +70,6 @@
     },
     data () {
       return {
-        name: '',
         paused: false,
         error: false,
         averageSpeed: 0,
@@ -226,7 +224,7 @@
       }
     },
     mounted () {
-      const staticProps = ['name', 'paused', 'error', 'averageSpeed', 'currentSpeed']
+      const staticProps = ['paused', 'error', 'averageSpeed', 'currentSpeed']
       const fnProps = [
         'isComplete',
         'isUploading',
