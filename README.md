@@ -158,6 +158,8 @@ See [simple-uploader.js uploader/events](https://github.com/simple-uploader/Uplo
 
 * `file-added(file)`, file added event, this event is used for file validation. To reject this file you should set `file.ignored = true`.
 
+* `files-added(files, fileList)`, files added event, this event is used for files validation. To reject these files you should set `files.ignored = true` or `fileList.ignored = true`.
+
 #### Scoped Slots
 
 * `files {Array}`

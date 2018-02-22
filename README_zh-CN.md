@@ -161,6 +161,8 @@ new Vue({
 
 * `file-added(file)`, 添加了一个文件事件，一般用做文件校验，如果设置 `file.ignored = true` 的话这个文件就会被过滤掉。
 
+* `files-added(files, fileList)`, 添加了一批文件事件，一般用做一次选择的多个文件进行校验，如果设置 `files.ignored = true` 或者 ``fileList.ignored = true`` 的话本次选择的文件就会被过滤掉。
+
 #### 作用域插槽
 
 * `files {Array}`

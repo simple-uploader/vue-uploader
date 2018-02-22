@@ -24,6 +24,7 @@
 
   const COMPONENT_NAME = 'uploader'
   const FILE_ADDED_EVENT = 'fileAdded'
+  const FILES_ADDED_EVENT = 'filesAdded'
 
   export default {
     name: COMPONENT_NAME,
@@ -69,6 +70,13 @@
           return false
         }
       },
+      filesAdded (files, fileList) {
+        this.$emit(kebabCase(FILES_ADDED_EVENT), files, fileList)
+        if (files.ignored || fileList.ignored) {
+          // is ignored, filter it
+          return false
+        }
+      },
       fileRemoved (file) {
         this.files = this.uploader.files
         this.fileList = this.uploader.fileList
@@ -82,7 +90,7 @@
       },
       allEvent (...args) {
         const name = args[0]
-        if (name === FILE_ADDED_EVENT) {
+        if (name === FILE_ADDED_EVENT || name === FILES_ADDED_EVENT) {
           return
         }
         args[0] = kebabCase(name)
@@ -96,6 +104,7 @@
       uploader.on('catchAll', this.allEvent)
       uploader.on('uploadStart', this.uploadStart)
       uploader.on(FILE_ADDED_EVENT, this.fileAdded)
+      uploader.on(FILES_ADDED_EVENT, this.filesAdded)
       uploader.on('fileRemoved', this.fileRemoved)
       uploader.on('filesSubmitted', this.filesSubmitted)
     },
@@ -104,6 +113,7 @@
       uploader.off('catchAll', this.allEvent)
       uploader.off('uploadStart', this.uploadStart)
       uploader.off(FILE_ADDED_EVENT, this.fileAdded)
+      uploader.off(FILES_ADDED_EVENT, this.filesAdded)
       uploader.off('fileRemoved', this.fileRemoved)
       uploader.off('filesSubmitted', this.filesSubmitted)
       this.uploader = null
