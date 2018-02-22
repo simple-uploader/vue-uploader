@@ -261,10 +261,6 @@ uploaderInstance.cancel()
 
   当前状态，可能是：`success`, `error`, `uploading`, `paused`, `waiting`
 
-* `name {String}`
-
-  文件名字。
-
 * `paused {Boolean}`
 
   是否暂停了。

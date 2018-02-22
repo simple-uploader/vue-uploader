@@ -257,10 +257,6 @@ File item component.
 
   Current status, the values is one of `success`, `error`, `uploading`, `paused`, `waiting`
 
-* `name {String}`
-
-  File name.
-
 * `paused {Boolean}`
 
   Indicated if the file is paused.
