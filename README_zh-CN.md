@@ -4,6 +4,8 @@
 
 ![example](https://github.com/simple-uploader/vue-uploader/blob/master/example/simple-uploader.gif)
 
+![QQ](https://github.com/simple-uploader/Uploader/blob/develop/assets/simple-uploader-QQ.jpg?raw=true)
+
 ## 特性
 
 * 支持文件、多文件、文件夹上传

@@ -1,5 +1,5 @@
 <template>
-  <uploader :options="options" :file-status-text="statusText" class="uploader-example" ref="uploader" @file-complete="fileComplete" @complete="complete"></uploader>
+  <uploader :options="options" :file-status-text="statusText" class="uploader-example" ref="uploader" @file-complete="fileComplete" @files-submitted="filesSubmitted" @complete="complete"></uploader>
 </template>
 
 <script>
@@ -28,6 +28,10 @@
       },
       fileComplete () {
         console.log('file complete', arguments)
+      },
+      filesSubmitted() {
+        debugger
+        window.uploader.upload()
       }
     },
     mounted () {
