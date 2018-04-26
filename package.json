@@ -10,6 +10,7 @@
   "bugs": "https://github.com/simple-uploader/vue-uploader/issues",
   "homepage": "https://github.com/simple-uploader/vue-uploader",
   "author": "dolymood@gmail.com",
+  "license": "MIT",
   "scripts": {
     "dev": "node build/dev-server.js",
     "start": "node build/dev-server.js",
