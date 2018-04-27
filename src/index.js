@@ -8,7 +8,14 @@ import UploaderFile from './components/file.vue'
 
 const uploader = {
   version: /* eslint-disable no-undef */ __VERSION__,
-  install
+  install,
+  Uploader,
+  UploaderBtn,
+  UploaderDrop,
+  UploaderUnsupport,
+  UploaderList,
+  UploaderFiles,
+  UploaderFile
 }
 
 if (typeof window !== 'undefined' && window.Vue) {
