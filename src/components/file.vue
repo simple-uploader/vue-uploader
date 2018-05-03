@@ -91,7 +91,7 @@
         const extension = this.extension
         const isFolder = this.file.isFolder
         let type = isFolder ? 'folder' : 'unknown'
-        const categoryMap = file.uploader.opts.categoryMap
+        const categoryMap = this.file.uploader.opts.categoryMap
         const typeMap = categoryMap || {
           image: ['gif', 'jpg', 'jpeg', 'png', 'bmp', 'webp'],
           video: ['mp4', 'm3u8', 'rmvb', 'avi', 'swf', '3gp', 'mkv', 'flv'],
