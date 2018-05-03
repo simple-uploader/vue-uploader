@@ -116,20 +116,37 @@ new Vue({
 
   参考 [simple-uploader.js 配置](https://github.com/simple-uploader/Uploader/blob/develop/README_zh-CN.md#配置)。
 
-  此外，你还可以增加 `parseTimeRemaining(timeRemaining, parsedTimeRemaining)` 到配置项中，用于格式化你想要剩余时间，一般可以用来做多语言。参数：
+  此外，你可以有如下配置项可选：
 
-  * `timeRemaining{Number}`, 剩余时间，秒为单位
+  - `parseTimeRemaining(timeRemaining, parsedTimeRemaining) {Function}`
 
-  * `parsedTimeRemaining{String}`, 默认展示的剩余时间内容，你也可以这样做替换使用：
+    用于格式化你想要剩余时间，一般可以用来做多语言。参数：
+
+    - `timeRemaining{Number}`, 剩余时间，秒为单位
+
+    - `parsedTimeRemaining{String}`, 默认展示的剩余时间内容，你也可以这样做替换使用：
+
+      ```js
+      parseTimeRemaining: function (timeRemaining, parsedTimeRemaining) {
+        return parsedTimeRemaining
+          .replace(/\syears?/, '年')
+          .replace(/\days?/, '天')
+          .replace(/\shours?/, '小时')
+          .replace(/\sminutes?/, '分钟')
+          .replace(/\sseconds?/, '秒')
+      }
+      ```
+
+  - `categoryMap {Object}`
+
+    文件类型 map，默认：
 
     ```js
-    parseTimeRemaining: function (timeRemaining, parsedTimeRemaining) {
-      return parsedTimeRemaining
-        .replace(/\syears?/, '年')
-        .replace(/\days?/, '天')
-        .replace(/\shours?/, '小时')
-        .replace(/\sminutes?/, '分钟')
-        .replace(/\sseconds?/, '秒')
+    {
+      image: ['gif', 'jpg', 'jpeg', 'png', 'bmp', 'webp'],
+      video: ['mp4', 'm3u8', 'rmvb', 'avi', 'swf', '3gp', 'mkv', 'flv'],
+      audio: ['mp3', 'wav', 'wma', 'ogg', 'aac', 'flac'],
+      document: ['doc', 'txt', 'docx', 'pages', 'epub', 'pdf', 'numbers', 'csv', 'xls', 'xlsx', 'keynote', 'ppt', 'pptx']
     }
     ```
 

@@ -113,20 +113,36 @@ Root component.
 
   See [simple-uploader.js options](https://github.com/simple-uploader/Uploader#configuration).
 
-  Besides, you can added `parseTimeRemaining(timeRemaining, parsedTimeRemaining)` function option to format the current file's time remaining value(seconds, number), you can return your language time remaining text, params:
+  Besides, some other options are avaliable too:
 
-  * `timeRemaining{Number}`, time remaining seconds
+  - `parseTimeRemaining(timeRemaining, parsedTimeRemaining) {Function}`
 
-  * `parsedTimeRemaining{String}`, default shown time remaining text, you can use it like this:
+    this function option to format the current file's time remaining value(seconds, number), you can return your language time remaining text, params:
+
+    - `timeRemaining{Number}`, time remaining seconds
+
+    - `parsedTimeRemaining{String}`, default shown time remaining text, you can use it like this:
+
+      ```js
+      parseTimeRemaining: function (timeRemaining, parsedTimeRemaining) {
+        return parsedTimeRemaining
+          .replace(/\syears?/, '年')
+          .replace(/\days?/, '天')
+          .replace(/\shours?/, '小时')
+          .replace(/\sminutes?/, '分钟')
+          .replace(/\sseconds?/, '秒')
+      }
+      ```
+  - `categoryMap {Object}`
+
+    File category map, default:
 
     ```js
-    parseTimeRemaining: function (timeRemaining, parsedTimeRemaining) {
-      return parsedTimeRemaining
-        .replace(/\syears?/, '年')
-        .replace(/\days?/, '天')
-        .replace(/\shours?/, '小时')
-        .replace(/\sminutes?/, '分钟')
-        .replace(/\sseconds?/, '秒')
+    {
+      image: ['gif', 'jpg', 'jpeg', 'png', 'bmp', 'webp'],
+      video: ['mp4', 'm3u8', 'rmvb', 'avi', 'swf', '3gp', 'mkv', 'flv'],
+      audio: ['mp3', 'wav', 'wma', 'ogg', 'aac', 'flac'],
+      document: ['doc', 'txt', 'docx', 'pages', 'epub', 'pdf', 'numbers', 'csv', 'xls', 'xlsx', 'keynote', 'ppt', 'pptx']
     }
     ```
 
