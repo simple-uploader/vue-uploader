@@ -1,7 +1,7 @@
 <template>
-  <button class="uploader-btn" ref="btn" v-show="support">
+  <span class="uploader-btn" ref="btn" v-show="support">
     <slot></slot>
-  </button>
+  </span>
 </template>
 
 <script>
@@ -38,6 +38,7 @@
 
 <style>
   .uploader-btn {
+    display: inline-block;
     position: relative;
     padding: 4px 8px;
     font-size: 100%;
