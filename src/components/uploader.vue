@@ -43,7 +43,7 @@
       },
       autoStart: {
         type: Boolean,
-        default: false
+        default: true
       },
       fileStatusText: {
         type: Object,
