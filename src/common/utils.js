@@ -1,15 +1,3 @@
-export function getUploader (component) {
-  let parent = component.$parent
-  while (parent) {
-    if (parent.uploader) {
-      return parent.uploader
-    } else {
-      parent = parent.$parent
-    }
-  }
-  return null
-}
-
 export function secondsToStr (temp) {
   const years = Math.floor(temp / 31536000)
   if (years) {

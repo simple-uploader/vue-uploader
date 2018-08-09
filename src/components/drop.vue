@@ -31,7 +31,7 @@
     mounted () {
       this.$nextTick(() => {
         const dropEle = this.$refs.drop
-        this.uploader.assignDrop(dropEle)
+        this.uploader.uploader.assignDrop(dropEle)
         dropEle.addEventListener('dragenter', this.onDragEnter, false)
         dropEle.addEventListener('dragleave', this.onDragLeave, false)
         dropEle.addEventListener('drop', this.onDrop, false)
@@ -42,7 +42,7 @@
       dropEle.removeEventListener('dragenter', this.onDragEnter, false)
       dropEle.removeEventListener('dragleave', this.onDragLeave, false)
       dropEle.removeEventListener('drop', this.onDrop, false)
-      this.uploader.unAssignDrop(dropEle)
+      this.uploader.uploader.unAssignDrop(dropEle)
     }
   }
 </script>

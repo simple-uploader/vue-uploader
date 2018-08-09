@@ -30,7 +30,7 @@
     },
     mounted () {
       this.$nextTick(() => {
-        this.uploader.assignBrowse(this.$refs.btn, this.directory, this.single, this.attrs)
+        this.uploader.uploader.assignBrowse(this.$refs.btn, this.directory, this.single, this.attrs)
       })
     }
   }

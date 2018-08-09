@@ -1,9 +1,5 @@
-import { getUploader } from './utils'
-
 export const uploaderMixin = {
-  mounted () {
-    this.uploader = getUploader(this)
-  }
+  inject: ['uploader']
 }
 
 export const supportMixin = {
@@ -13,6 +9,6 @@ export const supportMixin = {
     }
   },
   mounted () {
-    this.support = this.uploader.support
+    this.support = this.uploader.uploader.support
   }
 }
