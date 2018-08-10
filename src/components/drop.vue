@@ -31,18 +31,20 @@
     mounted () {
       this.$nextTick(() => {
         const dropEle = this.$refs.drop
-        this.uploader.uploader.assignDrop(dropEle)
-        dropEle.addEventListener('dragenter', this.onDragEnter, false)
-        dropEle.addEventListener('dragleave', this.onDragLeave, false)
-        dropEle.addEventListener('drop', this.onDrop, false)
+        const uploader = this.uploader.uploader
+        uploader.assignDrop(dropEle)
+        uploader.on('dragenter', this.onDragEnter)
+        uploader.on('dragleave', this.onDragLeave)
+        uploader.on('drop', this.onDrop)
       })
     },
     beforeDestroy () {
       const dropEle = this.$refs.drop
-      dropEle.removeEventListener('dragenter', this.onDragEnter, false)
-      dropEle.removeEventListener('dragleave', this.onDragLeave, false)
-      dropEle.removeEventListener('drop', this.onDrop, false)
-      this.uploader.uploader.unAssignDrop(dropEle)
+      const uploader = this.uploader.uploader
+      uploader.off('dragenter', this.onDragEnter)
+      uploader.off('dragleave', this.onDragLeave)
+      uploader.off('drop', this.onDrop)
+      uploader.unAssignDrop(dropEle)
     }
   }
 </script>
