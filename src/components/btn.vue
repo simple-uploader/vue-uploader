@@ -1,7 +1,7 @@
 <template>
-  <span class="uploader-btn" ref="btn" v-show="support">
+  <label class="uploader-btn" ref="btn" v-show="support">
     <slot></slot>
-  </span>
+  </label>
 </template>
 
 <script>
