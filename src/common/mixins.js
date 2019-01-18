@@ -1,18 +1,18 @@
-import { getUploader } from './utils'
+import {getUploader} from './utils';
 
 export const uploaderMixin = {
-  mounted () {
-    this.uploader = getUploader(this)
-  }
-}
+    mounted() {
+        this.uploader = getUploader(this);
+    }
+};
 
 export const supportMixin = {
-  data () {
-    return {
-      support: true
+    data() {
+        return {
+            support: true
+        };
+    },
+    mounted() {
+        this.support = this.uploader.support;
     }
-  },
-  mounted () {
-    this.support = this.uploader.support
-  }
-}
+};
