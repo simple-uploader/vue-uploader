@@ -70,6 +70,7 @@
     },
     data () {
       return {
+        response: null,
         paused: false,
         error: false,
         averageSpeed: 0,
@@ -139,7 +140,14 @@
       },
       statusText () {
         const status = this.status
-        return this.file.uploader.fileStatusText[status] || status
+        const fileStatusText = this.file.uploader.fileStatusText
+        let txt = status
+        if (typeof fileStatusText === 'function') {
+          txt = fileStatusText(status, this.response)
+        } else {
+          txt = fileStatusText[status]
+        }
+        return txt || status
       },
       formatedTimeRemaining () {
         const timeRemaining = this.timeRemaining
@@ -189,12 +197,20 @@
         this.file.retry()
         this._actionCheck()
       },
+      processResponse (message) {
+        let res = message
+        try {
+          res = JSON.parse(message)
+        } catch (e) {}
+        this.response = res
+      },
       fileEventsHandler (event, args) {
         const rootFile = args[0]
         const file = args[1]
         const target = this.list ? rootFile : file
         if (this.file === target) {
           if (this.list && event === 'fileSuccess') {
+            this.processResponse(args[2])
             return
           }
           this[`_${event}`].apply(this, args)
@@ -208,7 +224,10 @@
         this.uploadedSize = this.file.sizeUploaded()
         this._actionCheck()
       },
-      _fileSuccess () {
+      _fileSuccess (rootFile, file, message) {
+        if (rootFile) {
+          this.processResponse(message)
+        }
         this._fileProgress()
         this.error = false
         this.isComplete = true

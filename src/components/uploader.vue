@@ -46,7 +46,7 @@
         default: true
       },
       fileStatusText: {
-        type: Object,
+        type: [Object, Function],
         default () {
           return {
             success: 'success',
