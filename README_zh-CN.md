@@ -168,6 +168,27 @@ new Vue({
   ```
   用于转换文件上传状态文本映射对象。
 
+  0.6.0 版本之后，`fileStatusText` 可以设置为一个函数，参数为 `(status, response = null)`， 第一个 status 为状态，第二个为响应内容，默认 null，示例：
+
+  ```js
+  fileStatusText(status, response) {
+    const statusTextMap = {
+      uploading: 'uploading',
+      paused: 'paused',
+      waiting: 'waiting'
+    }
+    if (status === 'success' || status === 'error') {
+      // 只有status为success或者error的时候可以使用 response
+
+      // eg:
+      // return response data ?
+      return response.data
+    } else {
+      return statusTextMap[status]
+    }
+  }
+  ```
+
 #### 事件
 
 参见 [simple-uploader.js uploader 事件](https://github.com/simple-uploader/Uploader/blob/develop/README_zh-CN.md#事件)

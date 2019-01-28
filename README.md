@@ -164,6 +164,27 @@ Root component.
   ```
   An object map for file status text.
 
+  After 0.6.0, `fileStatusText` can be a function with params `(status, response = null)`, you can control the status text more flexible:
+
+  ```js
+  fileStatusText(status, response) {
+    const statusTextMap = {
+      uploading: 'uploading',
+      paused: 'paused',
+      waiting: 'waiting'
+    }
+    if (status === 'success' || status === 'error') {
+      // only use response when status is success or error
+
+      // eg:
+      // return response data ?
+      return response.data
+    } else {
+      return statusTextMap[status]
+    }
+  }
+  ```
+
 #### Events
 
 See [simple-uploader.js uploader/events](https://github.com/simple-uploader/Uploader#events)
