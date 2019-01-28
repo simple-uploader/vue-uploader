@@ -6,6 +6,7 @@
       :status="status"
       :paused="paused"
       :error="error"
+      :response="response"
       :average-speed="averageSpeed"
       :formated-average-speed="formatedAverageSpeed"
       :current-speed="currentSpeed"
@@ -236,8 +237,9 @@
       _fileComplete () {
         this._fileSuccess()
       },
-      _fileError () {
+      _fileError (rootFile, file, message) {
         this._fileProgress()
+        this.processResponse(message)
         this.error = true
         this.isComplete = false
         this.isUploading = false
