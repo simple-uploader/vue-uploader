@@ -32,6 +32,12 @@
 npm install vue-simple-uploader --save
 ```
 
+## 笔记周边
+
+- https://www.cnblogs.com/xiahj/p/vue-simple-uploader.html
+- https://github.com/LuoLiangDSGA/spring-learning/tree/master/boot-uploader
+
+
 ## 使用
 
 ### 初始化
