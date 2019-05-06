@@ -1,6 +1,6 @@
 {
   "name": "vue-simple-uploader",
-  "version": "0.7.0",
+  "version": "0.7.1",
   "description": "A Vue.js upload component powered by simple-uploader.js",
   "main": "dist/vue-uploader.js",
   "repository": {
@@ -76,7 +76,8 @@
   },
   "browserslist": [
     "> 1%",
-    "last 2 versions",
-    "not ie <= 8"
+    "not ie <= 8",
+    "Android >= 4.0",
+    "iOS >= 8"
   ]
 }
