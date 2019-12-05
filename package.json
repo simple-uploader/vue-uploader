@@ -39,7 +39,7 @@
     "copy-webpack-plugin": "^4.0.1",
     "css-loader": "^0.28.0",
     "cssnano": "^3.10.0",
-    "eslint": "^3.19.0",
+    "eslint": "^4.18.2",
     "eslint-config-standard": "^6.2.1",
     "eslint-friendly-formatter": "^3.0.0",
     "eslint-loader": "^1.7.1",
@@ -65,7 +65,7 @@
     "vue-style-loader": "^3.0.1",
     "vue-template-compiler": "^2.3.3",
     "webpack": "^2.6.1",
-    "webpack-bundle-analyzer": "^2.2.1",
+    "webpack-bundle-analyzer": "^3.3.2",
     "webpack-dev-middleware": "^1.10.0",
     "webpack-hot-middleware": "^2.18.0",
     "webpack-merge": "^4.1.0"
