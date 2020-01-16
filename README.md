@@ -6,7 +6,7 @@
 
 ![QQ](https://github.com/simple-uploader/Uploader/blob/develop/assets/simple-uploader-QQ.jpg?raw=true)
 
-[中文](./README_zh-CN.md)
+[中文](./README_zh-CN.md)中文
 
 ## Features
 
