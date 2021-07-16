@@ -9,6 +9,6 @@ export const supportMixin = {
     }
   },
   mounted () {
-    this.support = this.uploader.uploader.support
+    this.support = this.uploader.support
   }
 }

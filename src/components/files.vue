@@ -11,21 +11,23 @@
 </template>
 
 <script>
-  import { uploaderMixin } from '../common/mixins'
+  import { ref } from 'vue'
   import UploaderFile from './file.vue'
+  import { uploaderMixin } from '../common/mixins'
 
   const COMPONENT_NAME = 'uploader-files'
 
   export default {
     name: COMPONENT_NAME,
     mixins: [uploaderMixin],
-    computed: {
-      files () {
-        return this.uploader.files
-      }
-    },
     components: {
       UploaderFile
+    },
+    setup () {
+      const fileList = ref([])
+      return {
+        fileList
+      }
     }
   }
 </script>
