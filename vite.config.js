@@ -30,7 +30,8 @@ export default defineConfig(
       lib: {
         entry: './src/index.js',
         name: 'vue-uploader.js'
-      }
+      },
+      cssCodeSplit: false
     },
     define: {
       __VERSION__: '"0.7.6"',

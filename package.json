@@ -1,5 +1,5 @@
 {
-  "name": "vue-uploader",
+  "name": "vue-simple-uploader",
   "version": "0.7.6",
   "description": "A Vue.js upload component powered by simple-uploader.js",
   "main": "dist/vue-uploader.js",

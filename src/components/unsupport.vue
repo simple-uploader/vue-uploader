@@ -9,13 +9,18 @@
 </template>
 
 <script>
-  import { uploaderMixin, supportMixin } from '../common/mixins'
-
+  import { inject } from 'vue'
   const COMPONENT_NAME = 'uploader-unsupport'
 
   export default {
     name: COMPONENT_NAME,
-    mixins: [uploaderMixin, supportMixin]
+    setup () {
+      const uploader = inject('uploader')
+      const support = uploader.support
+      return {
+        support
+      }
+    }
   }
 </script>
 

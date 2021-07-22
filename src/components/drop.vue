@@ -5,18 +5,17 @@
 </template>
 
 <script>
-  import { uploaderMixin, supportMixin } from '../common/mixins'
   import { inject, nextTick, ref, onBeforeUnmount } from 'vue'
 
   const COMPONENT_NAME = 'uploader-drop'
 
   export default {
     name: COMPONENT_NAME,
-    mixins: [uploaderMixin, supportMixin],
     setup () {
       const uploader = inject('uploader')
       let drop = ref(null)
       let dropClass = ref('')
+      const support = uploader.support
       const onDragEnter = () => {
         dropClass = 'uploader-dragover'
       }
@@ -43,6 +42,7 @@
       return {
         drop,
         dropClass,
+        support,
         onDragEnter,
         onDragLeave,
         onDrop

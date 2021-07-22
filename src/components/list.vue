@@ -11,7 +11,6 @@
 </template>
 
 <script>
-  import { uploaderMixin } from '../common/mixins'
   import { ref } from 'vue'
   import UploaderFile from './file.vue'
 
@@ -19,7 +18,6 @@
 
   export default {
     name: COMPONENT_NAME,
-    mixins: [uploaderMixin],
     components: {
       UploaderFile
     },

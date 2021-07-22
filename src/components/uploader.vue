@@ -1,6 +1,6 @@
 <template>
   <div class="uploader">
-    <slot :files="fileList" :file-list="fileList" :started="started">
+    <slot :files="files" :file-list="fileList" :started="started">
       <uploader-unsupport></uploader-unsupport>
       <uploader-drop>
         <p>Drop files here to upload or</p>

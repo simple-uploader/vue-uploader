@@ -13,20 +13,18 @@
 <script>
   import { ref } from 'vue'
   import UploaderFile from './file.vue'
-  import { uploaderMixin } from '../common/mixins'
 
   const COMPONENT_NAME = 'uploader-files'
 
   export default {
     name: COMPONENT_NAME,
-    mixins: [uploaderMixin],
     components: {
       UploaderFile
     },
     setup () {
-      const fileList = ref([])
+      const files = ref([])
       return {
-        fileList
+        files
       }
     }
   }
