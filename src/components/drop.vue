@@ -5,46 +5,48 @@
 </template>
 
 <script>
-  import { uploaderMixin, supportMixin } from '../common/mixins'
+  import { inject, nextTick, ref, onBeforeUnmount } from 'vue'
 
   const COMPONENT_NAME = 'uploader-drop'
 
   export default {
     name: COMPONENT_NAME,
-    mixins: [uploaderMixin, supportMixin],
-    data () {
-      return {
-        dropClass: ''
+    setup () {
+      const uploader = inject('uploader')
+      let drop = ref(null)
+      let dropClass = ref('')
+      const support = uploader.support
+      const onDragEnter = () => {
+        dropClass = 'uploader-dragover'
       }
-    },
-    methods: {
-      onDragEnter () {
-        this.dropClass = 'uploader-dragover'
-      },
-      onDragLeave () {
-        this.dropClass = ''
-      },
-      onDrop () {
-        this.dropClass = 'uploader-droped'
+      const onDragLeave = () => {
+        dropClass = ''
       }
-    },
-    mounted () {
-      this.$nextTick(() => {
-        const dropEle = this.$refs.drop
-        const uploader = this.uploader.uploader
+      const onDrop = () => {
+        dropClass = 'uploader-droped'
+      }
+      nextTick(() => {
+        const dropEle = drop.value
         uploader.assignDrop(dropEle)
-        uploader.on('dragenter', this.onDragEnter)
-        uploader.on('dragleave', this.onDragLeave)
-        uploader.on('drop', this.onDrop)
+        uploader.on('dragenter', onDragEnter)
+        uploader.on('dragleave', onDragLeave)
+        uploader.on('drop', onDrop)
       })
-    },
-    beforeDestroy () {
-      const dropEle = this.$refs.drop
-      const uploader = this.uploader.uploader
-      uploader.off('dragenter', this.onDragEnter)
-      uploader.off('dragleave', this.onDragLeave)
-      uploader.off('drop', this.onDrop)
-      uploader.unAssignDrop(dropEle)
+      onBeforeUnmount(() => {
+        const dropEle = drop.value
+        uploader.off('dragenter', onDragEnter)
+        uploader.off('dragleave', onDragLeave)
+        uploader.off('drop', onDrop)
+        uploader.unAssignDrop(dropEle)
+      })
+      return {
+        drop,
+        dropClass,
+        support,
+        onDragEnter,
+        onDragLeave,
+        onDrop
+      }
     }
   }
 </script>

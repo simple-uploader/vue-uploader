@@ -3,38 +3,44 @@
 </template>
 
 <script>
+  import { nextTick, ref, onMounted } from 'vue'
   export default {
-    data () {
-      return {
-        options: {
-          target: '//localhost:3000/upload', // '//jsonplaceholder.typicode.com/posts/',
-          testChunks: false
-        },
-        attrs: {
-          accept: 'image/*'
-        },
-        statusText: {
-          success: '成功了',
-          error: '出错了',
-          uploading: '上传中',
-          paused: '暂停中',
-          waiting: '等待中'
-        }
+    setup () {
+      const uploader = ref(null)
+      const options = {
+        target: '//localhost:3000/upload', // '//jsonplaceholder.typicode.com/posts/',
+        testChunks: false
       }
-    },
-    methods: {
-      complete () {
+      const attrs = {
+        accept: 'image/*'
+      }
+      const statusText = {
+        success: '成功了',
+        error: '出错了',
+        uploading: '上传中',
+        paused: '暂停中',
+        waiting: '等待中'
+      }
+      const complete = () => {
         debugger
         console.log('complete', arguments)
-      },
-      fileComplete () {
+      }
+      const fileComplete = () => {
         console.log('file complete', arguments)
       }
-    },
-    mounted () {
-      this.$nextTick(() => {
-        window.uploader = this.$refs.uploader.uploader
+      onMounted(() => {
+        nextTick(() => {
+          window.uploader = uploader.value.uploader
+        })
       })
+      return {
+        uploader,
+        options,
+        attrs,
+        statusText,
+        complete,
+        fileComplete
+      }
     }
   }
 </script>

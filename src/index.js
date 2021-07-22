@@ -18,21 +18,14 @@ const uploader = {
   UploaderFile
 }
 
-if (typeof window !== 'undefined' && window.Vue) {
-  window.Vue.use(install)
-}
-
 export default uploader
 
-function install (Vue) {
-  if (install.installed) {
-    return
-  }
-  Vue.component(Uploader.name, Uploader)
-  Vue.component(UploaderBtn.name, UploaderBtn)
-  Vue.component(UploaderDrop.name, UploaderDrop)
-  Vue.component(UploaderUnsupport.name, UploaderUnsupport)
-  Vue.component(UploaderList.name, UploaderList)
-  Vue.component(UploaderFiles.name, UploaderFiles)
-  Vue.component(UploaderFile.name, UploaderFile)
+function install (app, options) {
+  app.component(Uploader.name, Uploader)
+  app.component(UploaderBtn.name, UploaderBtn)
+  app.component(UploaderDrop.name, UploaderDrop)
+  app.component(UploaderUnsupport.name, UploaderUnsupport)
+  app.component(UploaderList.name, UploaderList)
+  app.component(UploaderFiles.name, UploaderFiles)
+  app.component(UploaderFile.name, UploaderFile)
 }
