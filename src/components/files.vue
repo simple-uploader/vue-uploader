@@ -11,7 +11,7 @@
 </template>
 
 <script>
-  import { ref } from 'vue'
+  import { inject, ref, watch } from 'vue'
   import UploaderFile from './file.vue'
 
   const COMPONENT_NAME = 'uploader-files'
@@ -22,7 +22,11 @@
       UploaderFile
     },
     setup () {
+      const uploader = inject('uploader')
       const files = ref([])
+      watch(uploader.files, () => {
+        files.value = uploader.files
+      })
       return {
         files
       }

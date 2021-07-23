@@ -5,7 +5,7 @@
 </template>
 
 <script>
-  import { nextTick, ref, onMounted, inject } from 'vue'
+  import { inject, nextTick, ref, onMounted } from 'vue'
 
   const COMPONENT_NAME = 'uploader-btn'
 

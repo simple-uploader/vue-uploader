@@ -7,13 +7,13 @@
         <uploader-btn>select files</uploader-btn>
         <uploader-btn :directory="true">select folder</uploader-btn>
       </uploader-drop>
-      <uploader-list ref="uploaderList"></uploader-list>
+      <uploader-list></uploader-list>
     </slot>
   </div>
 </template>
 
 <script>
-  import { provide, ref, onUnmounted, getCurrentInstance } from 'vue'
+  import { provide, ref, reactive, onUnmounted, getCurrentInstance } from 'vue'
   import Uploader from 'simple-uploader.js'
   import { kebabCase } from '../common/utils'
   import UploaderBtn from './btn.vue'
@@ -81,12 +81,10 @@
       const fileRemoved = (fi) => {
         files.value = uploader.files
         fileList.value = uploader.fileList
-        uploaderList.value.fileList = fileList.value
       }
       const filesSubmitted = (fi, flist) => {
         files.value = uploader.files
         fileList.value = uploader.fileList
-        uploaderList.value.fileList = fileList.value
         if (props.autoStart) {
           uploader.upload()
         }
@@ -127,7 +125,7 @@
         uploader = null
       })
 
-      provide('uploader', uploader)
+      provide('uploader', reactive(uploader))
       return {
         uploader,
         started,

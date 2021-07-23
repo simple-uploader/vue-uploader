@@ -49,10 +49,10 @@
 </template>
 
 <script>
-import Uploader from 'simple-uploader.js'
 import { computed, ref, watch, onMounted, onUnmounted, getCurrentInstance } from 'vue'
-import events from '../common/file-events'
+import Uploader from 'simple-uploader.js'
 import { secondsToStr } from '../common/utils'
+import events from '../common/file-events'
 const COMPONENT_NAME = 'uploader-file'
 
 export default {
