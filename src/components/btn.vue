@@ -5,13 +5,12 @@
 </template>
 
 <script>
-  import { uploaderMixin, supportMixin } from '../common/mixins'
+  import { inject, nextTick, ref, onMounted } from 'vue'
 
   const COMPONENT_NAME = 'uploader-btn'
 
   export default {
     name: COMPONENT_NAME,
-    mixins: [uploaderMixin, supportMixin],
     props: {
       directory: {
         type: Boolean,
@@ -28,10 +27,19 @@
         }
       }
     },
-    mounted () {
-      this.$nextTick(() => {
-        this.uploader.uploader.assignBrowse(this.$refs.btn, this.directory, this.single, this.attrs)
+    setup (props) {
+      const btn = ref(null)
+      const uploader = inject('uploader')
+      const support = uploader.support
+      onMounted(() => {
+        nextTick(() => {
+          uploader.assignBrowse(btn.value, props.directory, props.single, props.attrs)
+        })
       })
+      return {
+        btn,
+        support
+      }
     }
   }
 </script>

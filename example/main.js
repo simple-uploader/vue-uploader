@@ -1,12 +1,7 @@
-import Vue from 'vue'
+import { createApp } from 'vue'
 import uploader from '../src'
 import App from './App.vue'
 
-Vue.use(uploader)
-
-/* eslint-disable no-new */
-new Vue({
-  render(createElement) {
-    return createElement(App)
-  }
-}).$mount('#app')
+const app = createApp(App)
+app.use(uploader)
+app.mount('#app')

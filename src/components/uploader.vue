@@ -13,6 +13,7 @@
 </template>
 
 <script>
+  import { provide, ref, reactive, onUnmounted, getCurrentInstance } from 'vue'
   import Uploader from 'simple-uploader.js'
   import { kebabCase } from '../common/utils'
   import UploaderBtn from './btn.vue'
@@ -29,11 +30,6 @@
 
   export default {
     name: COMPONENT_NAME,
-    provide () {
-      return {
-        uploader: this
-      }
-    },
     props: {
       options: {
         type: Object,
@@ -58,43 +54,42 @@
         }
       }
     },
-    data () {
-      return {
-        started: false,
-        files: [],
-        fileList: []
+    setup (props, { emit }) {
+      const uploaderList = ref(null)
+      const started = ref(false)
+      const files = ref([])
+      const fileList = ref([])
+      const instance = getCurrentInstance()
+      let uploader = new Uploader(props.options)
+      const uploadStart = () => {
+        started.value = true
       }
-    },
-    methods: {
-      uploadStart () {
-        this.started = true
-      },
-      fileAdded (file) {
-        this.$emit(kebabCase(FILE_ADDED_EVENT), file)
+      const fileAdded = (file) => {
+        emit(kebabCase(FILE_ADDED_EVENT), file)
         if (file.ignored) {
           // is ignored, filter it
           return false
         }
-      },
-      filesAdded (files, fileList) {
-        this.$emit(kebabCase(FILES_ADDED_EVENT), files, fileList)
+      }
+      const filesAdded = (files, fileList) => {
+        emit(kebabCase(FILES_ADDED_EVENT), files, fileList)
         if (files.ignored || fileList.ignored) {
           // is ignored, filter it
           return false
         }
-      },
-      fileRemoved (file) {
-        this.files = this.uploader.files
-        this.fileList = this.uploader.fileList
-      },
-      filesSubmitted (files, fileList) {
-        this.files = this.uploader.files
-        this.fileList = this.uploader.fileList
-        if (this.autoStart) {
-          this.uploader.upload()
+      }
+      const fileRemoved = (fi) => {
+        files.value = uploader.files
+        fileList.value = uploader.fileList
+      }
+      const filesSubmitted = (fi, flist) => {
+        files.value = uploader.files
+        fileList.value = uploader.fileList
+        if (props.autoStart) {
+          uploader.upload()
         }
-      },
-      allEvent (...args) {
+      }
+      const allEvent = (...args) => {
         const name = args[0]
         const EVENTSMAP = {
           [FILE_ADDED_EVENT]: true,
@@ -106,31 +101,44 @@
           if (handler === true) {
             return
           }
-          this[handler].apply(this, args.slice(1))
+          instance.setupState[handler].apply(instance.setupState[handler], args.slice(1))
         }
         args[0] = kebabCase(name)
-        this.$emit.apply(this, args)
+        emit.apply(instance.setupState, args)
       }
-    },
-    created () {
-      this.options.initialPaused = !this.autoStart
-      const uploader = new Uploader(this.options)
-      this.uploader = uploader
-      this.uploader.fileStatusText = this.fileStatusText
-      uploader.on('catchAll', this.allEvent)
-      uploader.on(FILE_ADDED_EVENT, this.fileAdded)
-      uploader.on(FILES_ADDED_EVENT, this.filesAdded)
-      uploader.on('fileRemoved', this.fileRemoved)
-      uploader.on('filesSubmitted', this.filesSubmitted)
-    },
-    destroyed () {
-      const uploader = this.uploader
-      uploader.off('catchAll', this.allEvent)
-      uploader.off(FILE_ADDED_EVENT, this.fileAdded)
-      uploader.off(FILES_ADDED_EVENT, this.filesAdded)
-      uploader.off('fileRemoved', this.fileRemoved)
-      uploader.off('filesSubmitted', this.filesSubmitted)
-      this.uploader = null
+
+      props.options.initialPaused = !props.autoStart
+      uploader.fileStatusText = props.fileStatusText
+      uploader.on('catchAll', allEvent)
+      uploader.on(FILE_ADDED_EVENT, fileAdded)
+      uploader.on(FILES_ADDED_EVENT, filesAdded)
+      uploader.on('fileRemoved', fileRemoved)
+      uploader.on('filesSubmitted', filesSubmitted)
+      uploader[UPLOAD_START_EVENT] = uploadStart
+
+      onUnmounted(() => {
+        uploader.off('catchAll', allEvent)
+        uploader.off(FILE_ADDED_EVENT, fileAdded)
+        uploader.off(FILES_ADDED_EVENT, filesAdded)
+        uploader.off('fileRemoved', fileRemoved)
+        uploader.off('filesSubmitted', filesSubmitted)
+        uploader = null
+      })
+
+      provide('uploader', reactive(uploader))
+      return {
+        uploader,
+        started,
+        files,
+        fileList,
+        uploadStart,
+        fileAdded,
+        filesAdded,
+        fileRemoved,
+        filesSubmitted,
+        allEvent,
+        uploaderList
+      }
     },
     components: {
       UploaderBtn,

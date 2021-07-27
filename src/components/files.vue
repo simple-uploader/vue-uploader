@@ -11,21 +11,25 @@
 </template>
 
 <script>
-  import { uploaderMixin } from '../common/mixins'
+  import { inject, ref, watch } from 'vue'
   import UploaderFile from './file.vue'
 
   const COMPONENT_NAME = 'uploader-files'
 
   export default {
     name: COMPONENT_NAME,
-    mixins: [uploaderMixin],
-    computed: {
-      files () {
-        return this.uploader.files
-      }
-    },
     components: {
       UploaderFile
+    },
+    setup () {
+      const uploader = inject('uploader')
+      const files = ref([])
+      watch(uploader.files, () => {
+        files.value = uploader.files
+      })
+      return {
+        files
+      }
     }
   }
 </script>
