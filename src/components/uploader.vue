@@ -126,8 +126,6 @@
       })
 
       provide('uploader', reactive(uploader))
-      provide('files', files)
-      provide('fileList', fileList)
       
       return {
         uploader,

@@ -22,8 +22,8 @@
       UploaderFile
     },
     setup () {
-      const fileList = inject('fileList')
-     
+      const uploader = inject('uploader')
+      const fileList = uploader.fileList
       return {
         fileList
       }
