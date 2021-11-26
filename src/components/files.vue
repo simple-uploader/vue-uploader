@@ -23,12 +23,9 @@
     },
     setup () {
       const uploader = inject('uploader')
-      const files = ref([])
-      watch(uploader.files, () => {
-        files.value = uploader.files
-      })
+
       return {
-        files
+        files: uploader.files
       }
     }
   }
