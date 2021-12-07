@@ -24,7 +24,6 @@
     },
     methods: {
       complete () {
-        debugger
         console.log('complete', arguments)
       },
       fileComplete () {
