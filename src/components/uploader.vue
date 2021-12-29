@@ -65,8 +65,9 @@
         started.value = true
       }
       const fileAdded = (file) => {
-        emit(kebabCase(FILE_ADDED_EVENT), file)
-        if (file.ignored) {
+        const _file = reactive(file)
+        emit(kebabCase(FILE_ADDED_EVENT), _file)
+        if (_file.ignored) {
           // is ignored, filter it
           return false
         }
