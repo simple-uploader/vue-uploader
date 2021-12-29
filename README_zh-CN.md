@@ -1,4 +1,4 @@
-# vue-simple-uploader  [![NPM Version][npm-image]][npm-url] [![NPM Downloads][downloads-image]][downloads-url] [![juejin likes][juejin-image]](juejin-url)
+# vue-simple-uploader  [![NPM Version][npm-image]][npm-url] [![NPM Downloads][downloads-image]][downloads-url] [![juejin likes][juejin-url]][juejin-url]
 
 > 一个基于 [simple-uploader.js](https://github.com/simple-uploader/Uploader) 的 Vue 上传组件
 
@@ -29,7 +29,7 @@
 ## 安装
 
 ``` bash
-npm install vue-simple-uploader --save
+npm install vue-simple-uploader@next --save
 ```
 
 ## 笔记周边
@@ -43,18 +43,13 @@ npm install vue-simple-uploader --save
 ### 初始化
 
 ``` js
-import Vue from 'vue'
+import { createApp } from 'vue'
 import uploader from 'vue-simple-uploader'
 import App from './App.vue'
 
-Vue.use(uploader)
-
-/* eslint-disable no-new */
-new Vue({
-  render(createElement) {
-    return createElement(App)
-  }
-}).$mount('#app')
+const app = createApp(App)
+app.use(uploader)
+app.mount('#app')
 ```
 
 ### App.vue
@@ -74,17 +69,42 @@ new Vue({
 </template>
 
 <script>
+  import { nextTick, ref, onMounted } from 'vue'
   export default {
-    data () {
+    setup () {
+      const uploader = ref(null)
+      const options = {
+        target: '//localhost:3000/upload', // '//jsonplaceholder.typicode.com/posts/',
+        testChunks: false
+      }
+      const attrs = {
+        accept: 'image/*'
+      }
+      const statusText = {
+        success: '成功了',
+        error: '出错了',
+        uploading: '上传中',
+        paused: '暂停中',
+        waiting: '等待中'
+      }
+      const complete = () => {
+        console.log('complete', arguments)
+      }
+      const fileComplete = () => {
+        console.log('file complete', arguments)
+      }
+      onMounted(() => {
+        nextTick(() => {
+          window.uploader = uploader.value.uploader
+        })
+      })
       return {
-        options: {
-          // https://github.com/simple-uploader/Uploader/tree/develop/samples/Node.js
-          target: '//localhost:3000/upload',
-          testChunks: false
-        },
-        attrs: {
-          accept: 'image/*'
-        }
+        uploader,
+        options,
+        attrs,
+        statusText,
+        complete,
+        fileComplete
       }
     }
   }
@@ -185,7 +205,7 @@ new Vue({
     }
     if (status === 'success' || status === 'error') {
       // 只有status为success或者error的时候可以使用 response
-
+  
       // eg:
       // return response data ?
       return response.data
@@ -228,6 +248,15 @@ new Vue({
 可以通过如下方式获得：
 
 ```js
+// Composition API
+const uploader = ref(null)
+// 在 uploader 组件上会有 uploader 属性 指向的就是 Uploader 实例
+const uploaderInstance = uploader.value.uploader
+// 这里可以调用实例方法
+// https://github.com/simple-uploader/Uploader/blob/develop/README_zh-CN.md#方法
+uploaderInstance.cancel()
+
+//Options API
 // 在 uploader 组件上会有 uploader 属性 指向的就是 Uploader 实例
 const uploaderInstance = this.$refs.uploader.uploader
 // 这里可以调用实例方法
@@ -392,14 +421,10 @@ npm run dev
 
 # build for production with minification
 npm run build
-
-# build for production and view the bundle analyzer report
-npm run build --report
 ```
 
 [npm-image]: https://img.shields.io/npm/v/vue-simple-uploader.svg?style=flat
 [npm-url]: https://npmjs.org/package/vue-simple-uploader
 [downloads-image]: https://img.shields.io/npm/dm/vue-simple-uploader.svg?style=flat
 [downloads-url]: https://npmjs.org/package/vue-simple-uploader
-[juejin-image]: https://badge.juejin.im/entry/599dad0ff265da248b04d7b8/likes.svg?style=flat
-[juejin-url]: https://juejin.im/entry/599dad0ff265da248b04d7b8/detail
+[juejin-url]: https://img.shields.io/badge/%E6%8E%98%E9%87%91-446Likes-blue.svg
