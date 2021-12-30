@@ -1,4 +1,4 @@
-# vue-simple-uploader  [![NPM Version][npm-image]][npm-url] [![NPM Downloads][downloads-image]][downloads-url] [![juejin likes][juejin-url]][juejin-url]
+# vue-simple-uploader  [![NPM Version][npm-image]][npm-url] [![NPM Downloads][downloads-image]][downloads-url] [![juejin likes][juejin-image]][juejin-url]
 
 > A Vue.js upload component powered by [simple-uploader.js](https://github.com/simple-uploader/Uploader)
 
@@ -422,5 +422,6 @@ npm run build
 [npm-url]: https://npmjs.org/package/vue-simple-uploader
 [downloads-image]: https://img.shields.io/npm/dm/vue-simple-uploader.svg?style=flat
 [downloads-url]: https://npmjs.org/package/vue-simple-uploader
-[juejin-url]: https://img.shields.io/badge/Jue%20Jin-446Likes-blue.svg
+[juejin-image]: https://img.shields.io/badge/Jue%20Jin-446Likes-blue.svg
+[juejin-url]: https://juejin.im/entry/599dad0ff265da248b04d7b8/detail
 
