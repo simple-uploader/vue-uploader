@@ -22,7 +22,6 @@
         waiting: '等待中'
       }
       const complete = () => {
-        debugger
         console.log('complete', arguments)
       }
       const fileComplete = () => {
