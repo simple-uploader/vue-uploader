@@ -78,11 +78,11 @@ app.mount('#app')
         accept: 'image/*'
       }
       const statusText = {
-        success: '成功了',
-        error: '出错了',
-        uploading: '上传中',
-        paused: '暂停中',
-        waiting: '等待中'
+        success: 'success',
+        error: 'error',
+        uploading: 'uploading',
+        paused: 'paused',
+        waiting: 'waiting'
       }
       const complete = () => {
         console.log('complete', arguments)
@@ -246,10 +246,10 @@ You can get it like this:
 ```js
 // Composition API
 const uploader = ref(null)
-// 在 uploader 组件上会有 uploader 属性 指向的就是 Uploader 实例
+// there will be an uploader attribute on the uploader component, which points to the Uploader instance
 const uploaderInstance = uploader.value.uploader
-// 这里可以调用实例方法
-// https://github.com/simple-uploader/Uploader/blob/develop/README_zh-CN.md#方法
+// now you can call all uploader methods
+// https://github.com/simple-uploader/Uploader#methods
 uploaderInstance.cancel()
 
 //Options API
