@@ -156,26 +156,26 @@ export default {
       }
       return parsedTimeRemaining
     })
-    const _actionCheck = () => {
+    const actionCheck = () => {
       paused.value = props.file.paused
       error.value = props.file.error
       isUploading.value = props.file.isUploading()
     }
     const pause = () => {
       props.file.pause()
-      _actionCheck()
-      _fileProgress()
+      actionCheck()
+      fileProgress()
     }
     const resume = () => {
       props.file.resume()
-      _actionCheck()
+      actionCheck()
     }
     const remove = () => {
       props.file.cancel()
     }
     const retry = () => {
       props.file.retry()
-      _actionCheck()
+      actionCheck()
     }
     const processResponse = (message) => {
       let res = message
@@ -196,28 +196,28 @@ export default {
         instance.setupState[`_${event}`](args)
       }
     }
-    const _fileProgress = () => {
+    const fileProgress = () => {
       progress.value = props.file.progress()
       averageSpeed.value = props.file.averageSpeed
       currentSpeed.value = props.file.currentSpeed
       timeRemaining.value = props.file.timeRemaining()
       uploadedSize.value = props.file.sizeUploaded()
-      _actionCheck()
+      actionCheck()
     }
-    const _fileSuccess = (rootFile, file, message) => {
+    const fileSuccess = (rootFile, file, message) => {
       if (rootFile) {
         processResponse(message)
       }
-      _fileProgress()
+      fileProgress()
       error.value = false
       isComplete.value = true
       isUploading.value = false
     }
-    const _fileComplete = () => {
-      _fileSuccess()
+    const fileComplete = () => {
+      fileSuccess()
     }
-    const _fileError = (rootFile, file, message) => {
-      _fileProgress()
+    const fileError = (rootFile, file, message) => {
+      fileProgress()
       processResponse(message)
       error.value = true
       isComplete.value = false
@@ -285,17 +285,17 @@ export default {
       status,
       statusText,
       formatedTimeRemaining,
-      _actionCheck,
+      actionCheck,
       pause,
       resume,
       remove,
       retry,
       processResponse,
       fileEventsHandler,
-      _fileProgress,
-      _fileSuccess,
-      _fileComplete,
-      _fileError
+      fileProgress,
+      fileSuccess,
+      fileComplete,
+      fileError
     }
   }
 }

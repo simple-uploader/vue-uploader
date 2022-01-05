@@ -42,6 +42,7 @@ npm install vue-simple-uploader@next --save
 ``` js
 import { createApp } from 'vue'
 import uploader from 'vue-simple-uploader'
+import 'vue-simple-uploader/dist/style.css'
 import App from './App.vue'
 
 const app = createApp(App)
