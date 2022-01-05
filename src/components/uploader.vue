@@ -102,10 +102,10 @@
           if (handler === true) {
             return
           }
-          instance.setupState[handler].apply(instance.setupState[handler], args.slice(1))
+          instance[handler].apply(instance[handler], args.slice(1))
         }
         args[0] = kebabCase(name)
-        emit.apply(instance.setupState, args)
+        emit.apply(instance, args)
       }
 
       props.options.initialPaused = !props.autoStart
