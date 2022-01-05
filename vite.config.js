@@ -1,6 +1,7 @@
 import { defineConfig } from 'vite';
 import path from 'path';
 import vue from '@vitejs/plugin-vue';
+import pkg from './package.json'
 
 // https://vitejs.dev/config/
 export default defineConfig(
@@ -34,7 +35,7 @@ export default defineConfig(
       cssCodeSplit: false
     },
     define: {
-      __VERSION__: '"0.7.6"',
+      __VERSION__: JSON.stringify(pkg.version),
       'process.env': {
         NODE_ENV: '"development"'
       }
