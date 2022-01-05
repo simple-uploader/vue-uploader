@@ -193,7 +193,7 @@ export default {
           processResponse(args[2])
           return
         }
-        instance.setupState[`_${event}`](args)
+        instance.ctx[`${event}`](args)
       }
     }
     const fileProgress = () => {
