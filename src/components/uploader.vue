@@ -102,7 +102,7 @@
           if (handler === true) {
             return
           }
-          instance.ctx[handler](...args.slice(1))
+          instance.setupState[handler](...args.slice(1))
         }
         args[0] = kebabCase(name)
         emit(...args)
