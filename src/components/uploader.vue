@@ -115,7 +115,7 @@
       uploader.on(FILES_ADDED_EVENT, filesAdded)
       uploader.on('fileRemoved', fileRemoved)
       uploader.on('filesSubmitted', filesSubmitted)
-      uploader[UPLOAD_START_EVENT] = uploadStart
+      // uploader[UPLOAD_START_EVENT] = uploadStart
 
       onUnmounted(() => {
         uploader.off('catchAll', allEvent)
