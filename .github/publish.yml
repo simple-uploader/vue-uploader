@@ -1,0 +1,54 @@
+name: Publish
+
+on:
+  push:
+    tags:
+      - 'v*' # Push events to matching v*, i.e. v1.0, v20.15.10
+
+jobs:
+  build:
+    # Run scripts on Linux
+    runs-on: ubuntu-latest
+    steps:
+      # Use github actions default to checkout corresponding branch
+      - uses: actions/checkout@v2
+
+      # Use github actions to install node at least 14 version
+      - name: Setup node
+        uses: actions/setup-node@v2
+        with:
+          node-version: '14'
+          registry-url: 'https://registry.npmjs.org'
+
+      # Use github actions to install pnpm at least 6 version 
+      - name: Install pnpm
+        uses: pnpm/action-setup@v2
+        with:
+          version: 6
+
+      # Install dependencies 
+      - name: Install dependencies
+        run: pnpm install
+
+      # Run build
+      - name: Build
+        run: pnpm build
+
+      # Use github actions to create release with tagName, commitMessage and committerName
+      - name: Create Release for Tag
+        id: release_tag
+        uses: yyx990803/release-tag@master
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: ${{ github.ref }}
+          body: |
+            ${{github.event.head_commit.message}} by **@${{github.event.head_commit.committer.name}}**
+
+      # Publish to npm 
+      # !It must configure npm token and tokenName same with NPM_PUBLISH_TOKEN
+      - name: Publish to npm registry
+        run: |
+          npm publish --access public
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_PUBLISH_TOKEN }}
