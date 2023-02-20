@@ -79,11 +79,11 @@
           return false
         }
       }
-      const fileRemoved = (fi) => {
+      const fileRemoved = () => {
         files.value = uploader.files
         fileList.value = uploader.fileList
       }
-      const filesSubmitted = (fi, flist) => {
+      const filesSubmitted = () => {
         files.value = uploader.files
         fileList.value = uploader.fileList
         if (props.autoStart) {

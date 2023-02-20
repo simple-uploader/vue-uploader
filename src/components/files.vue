@@ -11,7 +11,7 @@
 </template>
 
 <script>
-  import { inject, ref, watch } from 'vue'
+  import { inject } from 'vue'
   import UploaderFile from './file.vue'
 
   const COMPONENT_NAME = 'uploader-files'

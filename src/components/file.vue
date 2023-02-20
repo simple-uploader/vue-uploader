@@ -49,7 +49,7 @@
 </template>
 
 <script>
-import { computed, ref, watch, onMounted, onUnmounted, getCurrentInstance } from 'vue'
+import { computed, ref, toRaw, watch, onMounted, onUnmounted, getCurrentInstance } from 'vue'
 import Uploader from 'simple-uploader.js'
 import { secondsToStr } from '../common/utils'
 import events from '../common/file-events'
@@ -188,7 +188,7 @@ export default {
       const rootFile = args[0]
       const file = args[1]
       const target = props.list ? rootFile : file
-      if (JSON.stringify(props.file) === JSON.stringify(target)) {
+      if (toRaw(props.file) === toRaw(target)) {
         if (props.list && event === 'fileSuccess') {
           processResponse(args[2])
           return
