@@ -57,15 +57,22 @@ app.mount('#app')
 
 ``` vue
 <template>
-  <uploader :options="options" class="uploader-example">
-    <uploader-unsupport></uploader-unsupport>
+  <uploader
+    :options="options"
+    :file-status-text="statusText"
+    class="uploader-example"
+    ref="uploaderRef"
+    @file-complete="fileComplete"
+    @complete="complete"
+  >
+    <!-- <uploader-unsupport></uploader-unsupport>
     <uploader-drop>
       <p>Drop files here to upload or</p>
       <uploader-btn>select files</uploader-btn>
       <uploader-btn :attrs="attrs">select images</uploader-btn>
       <uploader-btn :directory="true">select folder</uploader-btn>
     </uploader-drop>
-    <uploader-list></uploader-list>
+    <uploader-list></uploader-list> -->
   </uploader>
 </template>
 
@@ -73,7 +80,7 @@ app.mount('#app')
   import { nextTick, ref, onMounted } from 'vue'
   export default {
     setup () {
-      const uploader = ref(null)
+      const uploaderRef = ref(null)
       const options = {
         target: '//localhost:3000/upload', // '//jsonplaceholder.typicode.com/posts/',
         testChunks: false
@@ -82,11 +89,11 @@ app.mount('#app')
         accept: 'image/*'
       }
       const statusText = {
-        success: '成功了',
-        error: '出错了',
-        uploading: '上传中',
-        paused: '暂停中',
-        waiting: '等待中'
+        success: 'success',
+        error: 'error',
+        uploading: 'uploading',
+        paused: 'paused',
+        waiting: 'waiting'
       }
       const complete = () => {
         console.log('complete', arguments)
@@ -96,11 +103,11 @@ app.mount('#app')
       }
       onMounted(() => {
         nextTick(() => {
-          window.uploader = uploader.value.uploader
+          window.uploader = uploaderRef.value.uploader
         })
       })
       return {
-        uploader,
+        uploaderRef,
         options,
         attrs,
         statusText,
@@ -215,6 +222,19 @@ app.mount('#app')
     }
   }
   ```
+
+
+* `onFileAdded(file) {Function}`
+  
+  `1.0.0+` 版本可用。
+
+  当文件添加的时候调用，一般用于文件的校验。如果你想过滤掉当前文件，那么你应该在此函数中 `return false`。
+
+* `onFilesAdded(files, fileList) {Function}`
+
+  `1.0.0+` 版本可用。
+
+  当一批文件添加的时候调用，一般用于的校验。如果你想过滤掉这些文件，那么你应该在此函数中 `return false`。
 
 #### 事件
 

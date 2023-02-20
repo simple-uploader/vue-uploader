@@ -54,15 +54,22 @@ app.mount('#app')
 
 ``` vue
 <template>
-  <uploader :options="options" class="uploader-example">
-    <uploader-unsupport></uploader-unsupport>
+  <uploader
+    :options="options"
+    :file-status-text="statusText"
+    class="uploader-example"
+    ref="uploaderRef"
+    @file-complete="fileComplete"
+    @complete="complete"
+  >
+    <!-- <uploader-unsupport></uploader-unsupport>
     <uploader-drop>
       <p>Drop files here to upload or</p>
       <uploader-btn>select files</uploader-btn>
       <uploader-btn :attrs="attrs">select images</uploader-btn>
       <uploader-btn :directory="true">select folder</uploader-btn>
     </uploader-drop>
-    <uploader-list></uploader-list>
+    <uploader-list></uploader-list> -->
   </uploader>
 </template>
 
@@ -70,7 +77,7 @@ app.mount('#app')
   import { nextTick, ref, onMounted } from 'vue'
   export default {
     setup () {
-      const uploader = ref(null)
+      const uploaderRef = ref(null)
       const options = {
         target: '//localhost:3000/upload', // '//jsonplaceholder.typicode.com/posts/',
         testChunks: false
@@ -93,11 +100,11 @@ app.mount('#app')
       }
       onMounted(() => {
         nextTick(() => {
-          window.uploader = uploader.value.uploader
+          window.uploader = uploaderRef.value.uploader
         })
       })
       return {
-        uploader,
+        uploaderRef,
         options,
         attrs,
         statusText,
@@ -211,6 +218,18 @@ Root component.
     }
   }
   ```
+
+* `onFileAdded(file) {Function}`
+  
+  After `1.0.0`.
+
+  Called when file is added, this function is used for file validation. To reject(filter) this file you should `return false`.
+
+* `onFilesAdded(files, fileList) {Function}`
+
+  After `1.0.0`.
+
+  Called when files are added, this function is used for files validation. To reject(filter) these files you should `return false`.
 
 #### Events
 

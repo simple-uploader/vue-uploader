@@ -52,7 +52,9 @@
             waiting: 'waiting'
           }
         }
-      }
+      },
+      onFileAdded: Function,
+      onFilesAdded: Function
     },
     setup (props, { emit }) {
       const uploaderList = ref(null)
@@ -66,6 +68,12 @@
       }
       const fileAdded = (file) => {
         const _file = reactive(file)
+        if (props.onFileAdded) {
+          const ignored = props.onFileAdded(_file)
+          if (ignored === false) {
+            return false
+          }
+        }
         emit(kebabCase(FILE_ADDED_EVENT), _file)
         if (_file.ignored) {
           // is ignored, filter it
@@ -73,6 +81,12 @@
         }
       }
       const filesAdded = (files, fileList) => {
+        if (props.onFilesAdded) {
+          const ignored = props.onFilesAdded(files, fileList)
+          if (ignored === false) {
+            return false
+          }
+        }
         emit(kebabCase(FILES_ADDED_EVENT), files, fileList)
         if (files.ignored || fileList.ignored) {
           // is ignored, filter it
