@@ -2,6 +2,8 @@
 
 > 一个基于 [simple-uploader.js](https://github.com/simple-uploader/Uploader) 的 Vue 上传组件
 
+[搭配 Vue 3](https://github.com/simple-uploader/vue-uploader/tree/vue3)
+
 ![example](https://github.com/simple-uploader/vue-uploader/blob/master/example/simple-uploader.gif)
 
 ![QQ](https://github.com/simple-uploader/Uploader/blob/develop/assets/simple-uploader-QQ-3.png?raw=true)
