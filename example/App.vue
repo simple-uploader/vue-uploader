@@ -1,5 +1,12 @@
 <template>
-  <uploader :options="options" :file-status-text="statusText" class="uploader-example" ref="uploaderRef" @file-complete="fileComplete" @complete="complete"></uploader>
+  <uploader
+    :options="options"
+    :file-status-text="statusText"
+    class="uploader-example"
+    ref="uploaderRef"
+    @file-complete="fileComplete"
+    @complete="complete"
+  ></uploader>
 </template>
 
 <script>
