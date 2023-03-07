@@ -11,7 +11,7 @@
 </template>
 
 <script>
-  import { inject } from 'vue'
+  import { inject, computed } from 'vue'
   import UploaderFile from './file.vue'
 
   const COMPONENT_NAME = 'uploader-list'
@@ -22,10 +22,10 @@
       UploaderFile
     },
     setup () {
-      const uploader = inject('uploader')
+      const uploader = inject('uploader').proxy
 
       return {
-        fileList: uploader.fileList
+        fileList: computed(() => uploader.fileList)
       }
     }
   }

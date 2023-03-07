@@ -15,7 +15,7 @@
   export default {
     name: COMPONENT_NAME,
     setup () {
-      const uploader = inject('uploader')
+      const uploader = inject('uploader').proxy.uploader
       const support = uploader.support
       return {
         support

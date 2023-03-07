@@ -29,7 +29,7 @@
     },
     setup (props) {
       const btn = ref(null)
-      const uploader = inject('uploader')
+      const uploader = inject('uploader').proxy.uploader
       const support = uploader.support
       onMounted(() => {
         nextTick(() => {

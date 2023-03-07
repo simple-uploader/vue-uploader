@@ -13,7 +13,7 @@
 </template>
 
 <script>
-  import { provide, ref, reactive, onUnmounted, getCurrentInstance } from 'vue'
+  import { provide, ref, onUnmounted, getCurrentInstance } from 'vue'
   import Uploader from 'simple-uploader.js'
   import { kebabCase } from '../common/utils'
   import UploaderBtn from './btn.vue'
@@ -27,6 +27,24 @@
   const FILE_ADDED_EVENT = 'fileAdded'
   const FILES_ADDED_EVENT = 'filesAdded'
   const UPLOAD_START_EVENT = 'uploadStart'
+
+  const ALL_EVENTS = [
+    'change',
+    'dragover',
+    'dragenter',
+    'dragleave',
+    'file-success',
+    'file-complete',
+    'file-progress',
+    'file-added',
+    'files-added',
+    'files-submitted',
+    'file-removed',
+    'file-retry',
+    'file-error',
+    'upload-start',
+    'complete'
+  ]
 
   export default {
     name: COMPONENT_NAME,
@@ -56,8 +74,8 @@
       onFileAdded: Function,
       onFilesAdded: Function
     },
+    emits: ALL_EVENTS,
     setup (props, { emit }) {
-      const uploaderList = ref(null)
       const started = ref(false)
       const files = ref([])
       const fileList = ref([])
@@ -67,17 +85,18 @@
         started.value = true
       }
       const fileAdded = (file) => {
-        const _file = reactive(file)
+        const _file = file
         if (props.onFileAdded) {
           const ignored = props.onFileAdded(_file)
           if (ignored === false) {
             return false
           }
-        }
-        emit(kebabCase(FILE_ADDED_EVENT), _file)
-        if (_file.ignored) {
-          // is ignored, filter it
-          return false
+        } else {
+          emit(kebabCase(FILE_ADDED_EVENT), _file)
+          if (_file.ignored) {
+            // is ignored, filter it
+            return false
+          }
         }
       }
       const filesAdded = (files, fileList) => {
@@ -86,20 +105,21 @@
           if (ignored === false) {
             return false
           }
-        }
-        emit(kebabCase(FILES_ADDED_EVENT), files, fileList)
-        if (files.ignored || fileList.ignored) {
-          // is ignored, filter it
-          return false
+        } else {
+          emit(kebabCase(FILES_ADDED_EVENT), files, fileList)
+          if (files.ignored || fileList.ignored) {
+            // is ignored, filter it
+            return false
+          }
         }
       }
       const fileRemoved = () => {
-        files.value = uploader.files
-        fileList.value = uploader.fileList
+        files.value = [...uploader.files]
+        fileList.value = [...uploader.fileList]
       }
       const filesSubmitted = () => {
-        files.value = uploader.files
-        fileList.value = uploader.fileList
+        files.value = [...uploader.files]
+        fileList.value = [...uploader.fileList]
         if (props.autoStart) {
           uploader.upload()
         }
@@ -140,7 +160,8 @@
         uploader = null
       })
 
-      provide('uploader', reactive(uploader))
+      provide('uploader', instance)
+
       return {
         uploader,
         started,
@@ -151,8 +172,7 @@
         filesAdded,
         fileRemoved,
         filesSubmitted,
-        allEvent,
-        uploaderList
+        allEvent
       }
     },
     components: {
