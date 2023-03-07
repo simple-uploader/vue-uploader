@@ -88,7 +88,7 @@
         const _file = file
         if (props.onFileAdded) {
           const ignored = props.onFileAdded(_file)
-          if (ignored === false) {
+          if (ignored === false || _file.ignored) {
             return false
           }
         } else {
@@ -102,7 +102,7 @@
       const filesAdded = (files, fileList) => {
         if (props.onFilesAdded) {
           const ignored = props.onFilesAdded(files, fileList)
-          if (ignored === false) {
+          if (ignored === false || (files.ignored || fileList.ignored)) {
             return false
           }
         } else {
