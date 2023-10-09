@@ -5,7 +5,7 @@
 </template>
 
 <script>
-  import { inject, nextTick, ref, onBeforeUnmount } from 'vue'
+  import { inject, nextTick, ref, onMounted, onBeforeUnmount } from 'vue'
 
   const COMPONENT_NAME = 'uploader-drop'
 
@@ -25,12 +25,14 @@
       const onDrop = () => {
         dropClass = 'uploader-droped'
       }
-      nextTick(() => {
-        const dropEle = drop.value
-        uploader.assignDrop(dropEle)
-        uploader.on('dragenter', onDragEnter)
-        uploader.on('dragleave', onDragLeave)
-        uploader.on('drop', onDrop)
+      onMounted(() => {
+        nextTick(() => {
+          const dropEle = drop.value
+          uploader.assignDrop(dropEle)
+          uploader.on('dragenter', onDragEnter)
+          uploader.on('dragleave', onDragLeave)
+          uploader.on('drop', onDrop)
+        })
       })
       onBeforeUnmount(() => {
         const dropEle = drop.value
