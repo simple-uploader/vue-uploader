@@ -26,7 +26,11 @@
       >
       <div class="uploader-file-progress" :class="progressingClass" :style="progressStyle"></div>
       <div class="uploader-file-info">
-        <div class="uploader-file-name"><i class="uploader-file-icon" :icon="fileCategory"></i>{{file.name}}</div>
+        <div class="uploader-file-name">
+          <i v-if="fileCategory !== 'image'" class="uploader-file-icon" :icon="fileCategory"></i>
+          <img v-else class="uploader-iamge-preview" :src="uploaderIamgePreviewSrc"/> 
+          {{file.name}}
+        </div>
         <div class="uploader-file-size">{{formatedSize}}</div>
         <div class="uploader-file-meta"></div>
         <div class="uploader-file-status">
@@ -88,6 +92,7 @@ export default {
     const type = ref('')
     const extension = ref('')
     const progressingClass = ref('')
+    const uploaderIamgePreviewSrc = ref('')
     const fileCategory = computed(() => {
       const isFolder = props.file.isFolder
       let type = isFolder ? 'folder' : 'unknown'
@@ -104,6 +109,9 @@ export default {
           type = _type
         }
       })
+      if(type === 'image') {
+        getPreviewUrl()
+      }
       return type
     })
     const progressStyle = computed(() => {
@@ -223,6 +231,9 @@ export default {
       isComplete.value = false
       isUploading.value = false
     }
+    const getPreviewUrl = () => {
+      uploaderIamgePreviewSrc.value = URL.createObjectURL(props.file.file)
+    }
     watch(status, (newStatus, oldStatus) => {
       if (oldStatus && newStatus === 'uploading' && oldStatus !== 'uploading') {
         tid = setTimeout(() => {
@@ -295,7 +306,8 @@ export default {
       fileProgress,
       fileSuccess,
       fileComplete,
-      fileError
+      fileError,
+      uploaderIamgePreviewSrc,
     }
   }
 }
@@ -365,18 +377,17 @@ export default {
   text-indent: 14px;
 }
 .uploader-file-icon {
-  width: 24px;
+  width: 60px;
   height: 24px;
   display: inline-block;
   vertical-align: top;
-  margin-top: 13px;
-  margin-right: 8px;
+  margin-top: 3px;
 }
 .uploader-file-icon::before {
   content: "📃";
   display: block;
   height: 100%;
-  font-size: 24px;
+  font-size: 40px;
   line-height: 1;
   text-indent: 0;
 }
@@ -394,6 +405,12 @@ export default {
 }
 .uploader-file-icon[icon="document"]::before {
   content: "📋";
+}
+.uploader-iamge-preview {
+  display: inline-block;
+  width: 60px;
+  height: 100%;
+  vertical-align: middle;
 }
 .uploader-file-size {
   width: 13%;
